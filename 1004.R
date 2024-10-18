@@ -124,26 +124,6 @@ while(TRUE){
   y=y-20
 }
 
-arrow = image_read("D:/R_data/1004_img/arrow.png") #화살
-arrow = image_scale(arrow, "100x25!")
-arrow = image_rotate(image_background(arrow, "none"), 15)
 
-while(TRUE){
-  print(img)
-  # 화살이미지 위치(x,y)
-  Position = geometry_point(x, y)
-  
-  # 이미지 합성: bg2(배경+과녁판) + arrow(화살)
-  img = image_composite(bg2, arrow, offset = Position)
-  
-  
-  
-  Sys.sleep(0.0001)
-  # x축의 값이 400이 되면 반복문 빠져나간다.
-  if(x==400)
-    break
-  x=x+20
-  y=y+20
-}
 
 
