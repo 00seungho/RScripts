@@ -163,23 +163,23 @@ longlat
 
 df.PM10 = merge(x=df.region, y=longlat, by="NAME", all=TRUE)
 df.PM10
-
+# df.PM10이 long, lat 컬럼의 좌표 정보를 담고 있으면
+# df.PM10 <- st_as_sf(df.PM10, coords = c("long", "lat"), crs = 4326)
+# df.PM10 <- st_transform(df.PM10, st_crs(map))
+###############################################################
+df.PM10
 
 library(ggplot2)
 
-ggplot() + 
-  #  geom_sf(data=map,
-  #          fill="white",
-  #          alpha=0.5,
-  #          color="black") + 
-  geom_polygon(data=total_longlat,
-               aes(x=long, y=lat),
-               fill="white",
-               alpha=0.5,
-               color="black") + 
-  geom_point(data = df.PM10, aes(x=long, y=lat, size=PM10),
-             shape=21, color="black", fill="red", alpha=0.3) + 
-  theme(legend.position = "none") + 
-  labs(title="PM10 농동 분포", x="경도", y = "위도")
+ggplot() +
+  geom_sf(data = map,
+          fill = "white", alpha = 0.5,
+          color = "black") +
+  geom_point(data = df.PM10,
+             aes(x=st_coordinates(geometry)[,1], y=st_coordinates(geometry)[,2], size=PM10),
+             color="red",alpha=0.3) +
+  theme(legend.position = "none") +
+  labs(title = "PM10 분포 포인트", x = "경도", y = "위도")
+
 
 
