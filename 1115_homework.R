@@ -16,7 +16,7 @@ Client_ID = "QfEXZ2kHkdH9exIHjJCt"
 Client_Secret = "Q5wtHM9zdo"
 
 # 검색하고자 하는 키워드를 한글일 경우 UTF-8로 인코딩 설정
-query = URLencode(iconv("일본 여행", "UTF-8"))
+query = URLencode(iconv("일본 여행 후기", "UTF-8"))
 url = paste(searchUrl, "?query=", query, "&display=20", sep = "")
 url
 
@@ -42,11 +42,11 @@ description
 description2 = gsub("\\d|<b>|</b>|&quot;", "", description)
 description2
 
-# 뉴스 내용 중에 명사만 추출
+# 블로그 내용 중에 명사만 추출
 nouns = nouns(iconv(description2, "utf-8"))
 nouns
 
-# 기사 한 개당 나누어져 있는 벡터를 하나의 벡터로 통합
+# 블로그 한 개당 나누어져 있는 벡터를 하나의 벡터로 통합
 nouns.all = unlist(nouns, use.names = F)
 nouns.all
 
@@ -67,5 +67,5 @@ nouns.df.sortdesc = nouns.df[order(-nouns.df$Freq), ]
 nouns.df.sortdesc
 
 # 워드 클라우드를 사용하여 빈도수에 따른 단어들을 시각화
-wordcloud2(nouns.df.sortdesc, size = 1, rotateRatio = 0.5)
+wordcloud2(nouns.df.sortdesc, size = 3, rotateRatio = 0.5)
 
